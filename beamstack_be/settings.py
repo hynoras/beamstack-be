@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+from utils.env import get_env
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -73,9 +75,13 @@ WSGI_APPLICATION = 'beamstack_be.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': get_env("DB_NAME"),
+        'USER': get_env("DB_USER"),
+        'PASSWORD': get_env("DB_PASSWORD"),
+        'HOST': get_env("DB_HOST"), 
+        'PORT': get_env("DB_PORT"), 
     }
 }
 
