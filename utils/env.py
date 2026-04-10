@@ -1,5 +1,5 @@
+from typing import Any
 import logging
-from environ import Env
 import environ
 from pathlib import Path
 
@@ -9,14 +9,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 logger = logging.getLogger(__name__)
 
 
-def get_env(variable: str) -> Env:
+def get_env(variable: str) -> Any:
     env = environ.Env(
         DEBUG=(bool, False)
     )
 
     environ.Env.read_env(BASE_DIR / '.env')
 
-    if env(variable) is None:
+    loaded_env = env(variable)
+
+    if loaded_env is None:
         logger.warning("Warning: ${variable} is invalid or missing in env config")
 
-    return env
+    return loaded_env
