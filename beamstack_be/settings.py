@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework'
+    'rest_framework',
+    'projects'
 ]
 
 MIDDLEWARE = [
@@ -69,6 +70,10 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'beamstack_be.wsgi.application'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'utils.pagination.CustomPagination',
+}
 
 
 # Database
